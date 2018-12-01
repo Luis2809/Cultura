@@ -1,0 +1,297 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['user'])){
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Biblioteca Online Administracion</title>
+  <?php require_once "scripts.php" ?>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Raleway:400,300,700,900" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Template Name: Spot
+    Template URL: https://templatemag.com/spot-bootstrap-freelance-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="index.php">Administracion</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.php">Inicio</a></li>
+          <li class="active"><a href="about.html">Administadores</a></li>
+          <li><a href="services.php">Libros</a></li>
+          <li><a href="works.html">Ayuda</a></li>  
+          <li><a href="../php/salir.php">Salir</a></li>  
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+
+      <!-- col-lg-3 -->
+
+    </div>
+    <!-- row -->
+    <br>
+  </div>
+  <!-- container -->
+
+  <!-- DG -->
+
+  <div class="container">
+    <dir class="row">
+      <div class="col-sm-12">
+        <div class="card text-left">
+          <div class="card-header">
+            Tablas administradores
+          </div>
+            <br>
+          <div class="card-body">
+            <span class="btn btn-primary" data-toggle="modal" data-target="#agregarnuevosdatosmodal">
+              Agregar nuevo <span class="fa fa-plus-circle"></span>
+            </span>
+            <hr>
+            <div id="tablaDatatable"></div>
+          </div>
+          <div class="card-footer text-muted">
+            Casa de la cultura
+          </div>
+        </div>
+      </div>
+      
+    </dir>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="agregarnuevosdatosmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="frmnuevo">
+            <label>Nombre</label>
+            <input type="text" class="form-control input-sm" id="nombre" name="nombre">
+            <label>Año</label>
+            <input type="text" class="form-control input-sm" id="anio" name="anio">
+            <label>Empresa</label>
+            <input type="text" class="form-control input-sm" id="empresa" name="empresa">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" id="btnAgregarnuevo" class="btn btn-primary">Agregar nuevo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="frmnuevoU">
+            <input type="text" hidden="" id="idjuego" name="idjuego">
+            <label>Nombre</label>
+            <input type="text" class="form-control input-sm" id="nombreU" name="nombreU">
+            <label>Año</label>
+            <input type="text" class="form-control input-sm" id="anioU" name="anioU">
+            <label>Empresa</label>
+            <input type="text" class="form-control input-sm" id="empresaU" name="empresaU">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-warning" id="btnActualizar">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="f">
+    <div class="container">
+      <div class="row centered">
+      <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4" style="color:white">Direccion</h4>
+            <p class="lead mb-0" style="color:white">Avenida Gregorio Melara, # 1. Barrio El Calvario, Usulután</p>
+          </div>
+          <div class="col-md-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4" style="color:white">Redes sociales</h4>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/Casa-de-la-cultura-de-Usulut%C3%A1n-168669987318900/" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.youtube.com/channel/UCvAhjQG_xmseuTQZDfdWolA" target="_blank">
+                  <i class="fa fa-youtube"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4 class="text-uppercase mb-4" style="color:white">Información</h4>
+            <p class="lead mb-0" style="color:white">En este aplicativo podras crear usuario y eliminarlos, tambien tendras las opcion de administrar los libros disponibles (agregar libro, editar su informacion y eliminarlos)</p>
+          </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- Footer -->
+
+
+  <div id="copyrights">
+    <div class="container">
+      <p>
+        &copy; Derechos reservados Casa de cultura 2018
+      </p>
+    </div>
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/php-mail-form/validate.js"></script>
+  <script src="lib/chart/chart.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#btnAgregarnuevo').click(function(){
+      datos=$('#frmnuevo').serialize();
+      $.ajax({
+        type:"POST",
+        data:datos,
+        url:"procesos/agregar.php",
+        success:function(r){
+          if(r==1){
+            $('#frmnuevo')[0].reset();
+            $('#tablaDatatable').load('tbl-usuario.php');
+            alertify.success("Dato ingresado");
+          }else{
+            alertify.error("Fallo al agregar :(");
+          }
+        }
+      });
+    });
+    $('#btnActualizar').click(function(){
+      datos=$('#frmnuevoU').serialize();
+      $.ajax({
+        type:"POST",
+        data:datos,
+        url:"procesos/actualizar.php",
+        success:function(r){
+          if(r==1){
+            $('#tablaDatatable').load('tbl-usuario.php');
+            alertify.success("Dato actualizado");
+          }else{
+            alertify.error("Fallo al actualizar :(");
+          }
+        }
+      });
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#tablaDatatable').load('usuarios.php');
+  });
+</script>
+
+<script type="text/javascript">
+  function agregaFrmActualizar(idjuego){
+    $.ajax({
+      type:"POST",
+      data:"idjuego=" + idjuego,
+      url:"procesos/obtenDatos.php",
+      success:function(r){
+        datos=jQuery.parseJSON(r);
+        $('#idjuego').val(datos['id_juego']);
+        $('#nombreU').val(datos['nombre']);
+        $('#anioU').val(datos['anio']);
+        $('#empresaU').val(datos['empresa']);
+      }
+    });
+  }
+
+  function eliminarDatos(idjuego){
+    alertify.confirm('Eliminar un dato', '¿Seguro de eliminar?', function(){ 
+      $.ajax({
+        type:"POST",
+        data:"idjuego=" + idjuego,
+        url:"procesos/eliminar.php",
+        success:function(r){
+          if(r==1){
+            $('#tablaDatatable').load('usuarios.php');
+            alertify.success("Eliminado con exito !");
+          }else{
+            alertify.error("No se pudo eliminar...");
+          }
+        }
+      });
+    }
+    , function(){
+    });
+  }
+</script>
+
+<?php
+}else{
+    header("location:../index.php");
+    }
+?>
